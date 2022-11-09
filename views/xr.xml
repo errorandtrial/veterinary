@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="xr_list_action">
+            <field name="name">Radiology</field>
+            <field name="res_model">veterinary.xr</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="xr_tree_view">
+            <field name="name">veterinary.xr.tree</field>
+            <field name="model">veterinary.xr</field>
+            <field name="arch" type="xml">
+                <tree string="xr Tree">
+                    <field name="date"/>
+                    <field name="animal"/>
+                    <field name="name"/> 
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="xr_form_view">
+            <field name="name">veterinary.xr.form</field>
+            <field name="model">veterinary.xr</field>
+            <field name="arch" type="xml">
+                <form string="xr Form" create="false">
+                    <header>
+                        <button name="action_xr_sent" type="object" string="Send by Email" class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id" domain="[('customer', '=' ,True)]"/>
+                                <field name="animal" domain="[('partner_id','=',partner_id)]"/>   
+                                <field name="user_id" />
+                            </group>
+                            <group>
+                                <field name="appointment_id" domain="[('state', '!=' ,'cancel'),('partner_id','=',partner_id)]"/>
+                            </group>
+                        </group>                        
+                        <notebook>
+                           <page string="XR Exam">
+                                <group>
+                                    <group>
+                                        <field name="xr_projection" />
+                                        <field name="findings_xr" />
+                                    </group>                                    
+                                </group>
+                            </page>                                                       
+                        </notebook>
+                        <group>
+                            <field name="other_xr"/>
+                            <field name="overall_assessment_xr"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="xr_search_view">
+            <field name="name">veterinary.xr.search</field>
+            <field name="model">veterinary.xr</field>
+            <field name="arch" type="xml">
+                <search>
+                    <group string="Group By">
+                        <filter name="group_by_animal" string="Animal" context="{'group_by': 'animal'}"/>
+                        <filter name="group_by_name" string="Appointment" context="{'group_by': 'appointment_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_xr_form" model="ir.actions.act_window">
+            <field name="name">xrs</field>
+            <field name="res_model">veterinary.xr</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="xr_search_view"/>
+            <field name="view_id" ref="xr_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

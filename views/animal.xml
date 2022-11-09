@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="animal_list_action1">
+            <field name="name">Animals</field>
+            <field name="res_model">veterinary.animal</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('partner_id','=','default_partner_id')]</field>
+            <field name="context">{'default_partner_id':'partner_id'}</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+        <record model="ir.actions.act_window" id="animal_list_action">
+            <field name="name">Animals</field>
+            <field name="res_model">veterinary.animal</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <record model="ir.ui.view" id="animal_tree_view">
+            <field name="name">veterinary.animal.tree</field>
+            <field name="model">veterinary.animal</field>
+            <field name="arch" type="xml">
+                <tree string="Animal Tree">
+                    <field name="microchip_number"/>
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="colour" />
+                    <field name="sex"/>
+                    <field name="bread"/>
+                    <field name="partner_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="animal_form_view">
+            <field name="name">veterinary.animal.form</field>
+            <field name="model">veterinary.animal</field>
+            <field name="arch" type="xml">
+                <form string="Animal Form">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object" name="appointment_view" class="oe_stat_button" icon="fa-calendar-check-o">
+                                <div class="o_form_field o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="total_appointment"/>
+                                    </span>
+                                    <span class="o_stat_text">Appointment</span>
+                                </div>
+                            </button>
+                        </div>
+                        <field name="image" widget="image" class="oe_avatar" />
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Name"/>
+                            </h1>  
+                            <field name="microchip_number" placeholder="Chip Number"/>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="partner_id" domain="[('customer', '=', True)]"/>
+                                <field name="sex"/>
+                                <field name="bread"/>
+                            </group>
+                            <group>
+                                <field name="age"/>
+                                <field name="colour" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Veterinary Evaluation">
+                                <field name="evaluation"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="animal_search_view">
+            <field name="name">veterinary.animal.search</field>
+            <field name="model">veterinary.animal</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <group string="Group By">
+                        <filter name="group_by_colour" string="Colour" context="{'group_by': 'colour'}"/>
+                        <filter name="group_by_sex" string="Sex" context="{'group_by': 'sex'}"/>
+                        <filter name="group_by_bread" string="Bread" context="{'group_by': 'bread'}"/>
+                        <filter name="group_by_partner_id" string="Owner" context="{'group_by': 'partner_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="animal_kanban_view">
+            <field name="name">veterinary.animal.kanban</field>
+            <field name="model">veterinary.animal</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="image"/>
+                    <field name="microchip_number"/>
+                    <field name="partner_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_res_partner_kanban">
+                                <div class="o_kanban_image">
+                                    <t t-if="record.image.raw_value">
+                                        <img t-att-src="kanban_image('veterinary.animal', 'image', record.id.raw_value)" class="o_kanban_image oe_kanban_avatar_smallbox"/>
+                                    </t>
+                                </div>
+                                <div t-attf-class="oe_kanban_content">
+                                    <!-- title -->
+                                    <field name="name"/>
+                                    <span> - </span>
+                                    <field name="microchip_number"/>
+                                    <br/>
+                                    <field name="partner_id"/>
+                                    <br/>
+
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <!-- Animal Onwer -->
+        <record model="ir.ui.view" id="animal_view_buttons">
+            <field name="name">partner.view.buttons</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="priority" eval="20"/>
+            <!-- <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]"/> -->
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button type="object" class="oe_stat_button" id="animal_button" icon="fa-paw" name="open_animal" groups="veterinary.group_veterinary_manager" context="{'default_partner_id': active_id}">
+                        <div class="o_form_field o_stat_info">
+                            <span class="o_stat_text">Animals</span>
+                        </div>
+                    </button>
+                </div>
+
+            </field>
+        </record>
+
+
+        <record id="action_animal_form" model="ir.actions.act_window">
+            <field name="name">Animals</field>
+            <field name="res_model">veterinary.animal</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="animal_search_view"/>
+            <field name="view_id" ref="animal_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+            </field>
+        </record>
+
+        <record id="invocie_animal_page" model="ir.ui.view">
+            <field name="name">res.partner.animal</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//notebook" position="inside">
+                    <page string="Animal" class="oe_page_Customer Code" groups="veterinary.group_veterinary_manager">
+                        <field name="animal_picking_id"/>
+                        <!-- <field name="product_code" widget="one2many_list" context="{'show_attribute': False}">
+              <tree string="Variants" editable="bottom">
+                <field name="partner_id" domain="[('customer','=',True)]"/>
+                <field name="partner_code"/>
+              </tree>
+            </field> -->
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

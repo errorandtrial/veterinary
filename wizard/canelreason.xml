@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_cancel_appoint_form" model="ir.ui.view">
+            <field name="name">veterinary.cancel.appointment.form</field>
+            <field name="model">cancel.appoint.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Appointment Cancel Reasion" version="7">
+                    <p>why you want to cancel this appointment?</p>
+                    <field name="reason"/>
+                    <footer>
+                        <button string='Confirm' name="action_cancel_appointment" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_account_cancel_appointment" model="ir.actions.act_window">
+            <field name="name">Cancel Appointment</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cancel.appoint.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_account_cancel_appoint_form"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

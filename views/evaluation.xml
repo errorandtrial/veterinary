@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="evaluation_list_action">
+            <field name="name">Veterinary Evaluation</field>
+            <field name="res_model">veterinary.evaluation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="evaluation_tree_view">
+            <field name="name">veterinary.evaluation.tree</field>
+            <field name="model">veterinary.evaluation</field>
+            <field name="arch" type="xml">
+                <tree string="Evaluation Tree" create="false">
+                    <field name="animal"/>
+                    <field name="appointment_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="evaluation_form_view">
+            <field name="name">veterinary.evaluation.form</field>
+            <field name="model">veterinary.evaluation</field>
+            <field name="arch" type="xml">
+                <form string="Evaluation Form" create="false">
+                    <header>
+                        <button name="action_evaluation_sent" type="object" string="Send by Email" class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="animal"/>
+                                <field name="stage_id"/>
+                                <field name="partner_id" domain="[('customer', '=' ,True)]"/>
+                            </group>
+                            <group>
+                                <field name="appointment_id" domain="[('state', '!=' ,'cancel'),('partner_id','=',partner_id)]"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Musculoskeletal">
+                                <group>
+                                    <group>
+                                        <field name="conformation" id="conformation"/>
+                                        <field name="le"/>
+                                        <field name="lh"/>
+                                        <field name="neck_back_pelvis"/>
+                                        <field name="ridden"/>
+                                        <field name="walk"/>
+                                    </group>
+                                    <group>
+                                        <field name="feet_shoeing"/>
+                                        <field name="rf"/>
+                                        <field name="rh"/>
+                                        <field name="flexion_tests"/>
+                                        <field name="diagnostic_imaging"/>
+                                        <field name="trot"/>
+                                    </group>
+                                </group>
+
+                            </page>
+                            <page string="Respiratory">
+                                <group>
+                                    <group>
+                                        <field name="res_general" />
+                                        <field name="lung_auscultation" />
+                                    </group>
+                                    <group>
+                                        <field name="upper_airway_endoscopy" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Cardiovascular">
+                                <group>
+                                    <group>
+                                        <field name="cardi_general" />
+                                        <field name="ecg" />
+                                    </group>
+                                    <group>
+                                        <field name="auscultation" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Gastrointestinal">
+                                <group>
+                                    <group>
+                                        <field name="gest_general" />
+                                        <field name="teeth" />
+                                    </group>
+                                    <group>
+                                        <field name="worming_history" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Nervous">
+                                <group>
+                                    <group>
+                                        <field name="nevr_general" />
+                                        <field name="gait" />
+                                    </group>
+                                    <group>
+                                        <field name="mentation" />
+                                        <field name="eyes" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Reproductive and Urinary">
+                                <group>
+                                    <group>
+                                        <field name="fig" />
+                                        <field name="vulva" />
+                                    </group>
+                                    <group>
+                                        <field name="testicles" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Skin">
+                                <group>
+                                    <group>
+                                        <field name="scars" />
+                                        <field name="Dermatitis" />
+                                        <field name="skin_other" />
+                                    </group>
+                                    <group>
+                                        <field name="melanomas" />
+                                        <field name="Allergy" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                        <group>
+                            <field name="other"/>
+                            <field name="overall_assessment"/>
+                            <field name="recommendations"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_veterinary_evaluation_kanban">
+            <field name="name">veterinary.evaluation.kanban</field>
+            <field name="model">veterinary.evaluation</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="stage_id" class="o_kanban_small_column" create="false">
+                    <field name="appointment_id"/>
+                    <field name="animal"/>
+                    <field name="partner_id"/>
+                    <field name="stage_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+
+                                <div class="o_dropdown_kanban dropdown" groups="base.group_user">
+                                    <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                        <span class="fa fa-bars fa-lg"/>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <t t-if="widget.editable">
+                                            <li>
+                                                <a type="edit">Edit Task</a>
+                                            </li>
+                                        </t>
+                                        <t t-if="widget.deletable">
+                                            <li>
+                                                <a type="delete">Delete</a>
+                                            </li>
+                                        </t>
+                                        <li>
+                                            <!-- <ul class="oe_kanban_colorpicker" data-field="color"/> -->
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="oe_kanban_content">
+                                    <div>
+                                        <field name="appointment_id"/>
+                                    </div>
+                                    <div>
+                                        <field name="partner_id"/>
+                                    </div>
+                                    <div>
+                                        <strong>
+                                            <field name="animal"/>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="evaluation_search_view">
+            <field name="name">veterinary.evaluation.search</field>
+            <field name="model">veterinary.evaluation</field>
+            <field name="arch" type="xml">
+                <search>
+                    <group string="Group By">
+                        <filter name="group_by_animal" string="Animal" context="{'group_by': 'animal'}"/>
+                        <filter name="group_by_name" string="Appointment" context="{'group_by': 'appointment_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

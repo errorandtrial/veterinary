@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="citology_list_action">
+            <field name="name">Citology</field>
+            <field name="res_model">veterinary.citology</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="citology_tree_view">
+            <field name="name">veterinary.citology.tree</field>
+            <field name="model">veterinary.citology</field>
+            <field name="arch" type="xml">
+                <tree string="Prueba Tree">                    
+                    <field name="date"/>
+                    <field name="animal"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="citology_form_view">
+            <field name="name">veterinary.citology.form</field>
+            <field name="model">veterinary.citology</field>
+            <field name="arch" type="xml">
+                <form string="Citologia Form" create="false">
+                    <header>
+                        <button name="action_citology_sent" type="object" string="Send by Email" class="oe_highlight" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id" domain="[('customer', '=' ,True)]"/>
+                                <field name="animal" domain="[('partner_id','=',partner_id)]"/>
+                                <field name="user_id"/>
+                            </group>
+                            <group>
+                                <field name="appointment_id" domain="[('partner_id','=',partner_id)]"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Citologia">
+                                <group>
+                                    <group>                                      
+                                        <field name="sample"/>
+                                        <field name="preparation"/>
+                                        <field name="staining"/>
+                                        <field name="findings_cito"/>
+                                    </group>                                    
+                                </group>
+                            </page>                  
+                    </notebook>
+                        <group>
+                            <field name="other_cito"/>
+                            <field name="overall_assessment_cito"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        
+        <record model="ir.ui.view" id="citology_search_view">
+            <field name="name">veterinary.citology.search</field>
+            <field name="model">veterinary.citology</field>
+            <field name="arch" type="xml">
+                <search>
+                    <group string="Group By">
+                        <filter name="group_by_animal" string="Animal" context="{'group_by': 'animal'}"/>
+                        <filter name="group_by_name" string="Appointment" context="{'group_by': 'appointment_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_citology_form" model="ir.actions.act_window">
+            <field name="name">Citología</field>
+            <field name="res_model">veterinary.citology</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="citology_search_view"/>
+            <field name="view_id" ref="citology_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

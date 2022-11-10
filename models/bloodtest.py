@@ -12,7 +12,7 @@ from odoo.tools.misc import formatLang
 class BloodTest(models.Model):
     _name = 'veterinary.bloodtest'
     _inherit = ['mail.thread']     
-    _order = "dateOfAppointment desc"
+    _order = "date desc"
     name = fields.Char(string='Test ID', required=True, copy=False, readonly=True,index=True, default=lambda self: _('New'))
     animal = fields.Many2one('veterinary.animal')
     owner_id = fields.Many2one('res.partner', string='Owner', required=True)

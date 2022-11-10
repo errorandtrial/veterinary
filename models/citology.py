@@ -13,11 +13,11 @@ from odoo.tools.misc import formatLang
 class Citology(models.Model):
     _name = 'veterinary.citology'
     _inherit = ['mail.thread']
-    _order = "dateOfAppointment desc"
+    _order = "date desc"
     name = fields.Char(string='Test ID', required=True, copy=False, readonly=True,index=True, default=lambda self: _('New'))
     animal = fields.Many2one('veterinary.animal')
-    partner_id = fields.Many2one('res.partner', string='Owner', required=True)
-    appointment_id = fields.Many2one('veterinary.appointment',string='Appointment',required=True,readonly=True)   
+    owner_id = fields.Many2one('res.partner', string='Owner', required=True)
+    appointment_id = fields.Many2one('veterinary.appointment',string='Appointment',required=True)
     date = fields.Datetime(string='Date', related='appointment_id.dateOfAppointment')
     user_id = fields.Many2one('res.users', string='Doctor')    
     sample = fields.Char('Muestra')

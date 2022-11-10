@@ -39,6 +39,7 @@
             <field name="model">veterinary.appointment</field>
             <field name="arch" type="xml">
                 <tree string="Appointment Tree" decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                    <button name="action_confirm" string="Confirm" states="draft" type="object" class="oe_highlight"/>                    
                     <field name="name"/>
                     <field name="description"/>
                     <field name="dateOfAppointment"/>
@@ -56,7 +57,7 @@
                 <form string="Appointment Form">
                     <header>
                         <button name="action_create_invoice" invisible='1' states="confirm" string="Create Invoice" type="object"/>
-                        <button name="action_confirm" string="Confirm" states="draft" type="object" class="oe_highlight" groups="veterinary.group_veterinary_manager"/>
+                        <button name="action_confirm" string="Confirm" states="draft" type="object" class="oe_highlight"/>
                         <button name="%(action_account_cancel_appointment)d" states="draft,confirm" string="Cancel" type="action"/>
                         <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,confirm,cancel"/>
                     </header>

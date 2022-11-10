@@ -31,13 +31,11 @@
                     </header>
                     <sheet>
                         <group>
-                            <group>
-                                <field name="partner_id" domain="[('customer', '=' ,True)]"/>
-                                <field name="animal" domain="[('partner_id','=',partner_id)]"/>   
+                            <group>                        
+                                <field name="owner_id" domain="[('customer', '=' ,True)]"/>
+                                <field name="animal" domain="[('partner_id','=',owner_id)]"/>   
+                                <field name="appointment_id" domain="[('partner_id','=',owner_id)]"/>
                                 <field name="user_id" />
-                            </group>
-                            <group>
-                                <field name="appointment_id" domain="[('state', '!=' ,'cancel'),('partner_id','=',partner_id)]"/>
                             </group>
                         </group>
                         <notebook>                            

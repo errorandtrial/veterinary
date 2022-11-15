@@ -71,6 +71,18 @@
                             <page string="Veterinary Evaluation">
                                 <field name="evaluation"/>
                             </page>
+                            <page string="Blood Tests">
+                                <field name="bloodtest"/>
+                            </page>
+                            <page string="Citology">
+                                <field name="citology"/>
+                            </page>
+                            <page string="Echography">
+                                <field name="echography"/>
+                            </page>
+                            <page string="Radiology">
+                                <field name="xr"/>
+                            </page> 
                         </notebook>
                     </sheet>
                 </form>

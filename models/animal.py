@@ -25,6 +25,10 @@ class Animal(models.Model):
         ,required=True,string="Breed & Use")
     partner_id = fields.Many2one('res.partner',string='Owner', required=True)
     evaluation = fields.One2many('veterinary.evaluation','animal',readonly=True)
+    # bloodtest = fields.One2many('veterinary.bloodtest','animal',readonly=True)
+    # citology = fields.One2many('veterinary.citology','animal',readonly=True)
+    # echography = fields.One2many('veterinary.echography','animal',readonly=True)
+    # xr = fields.One2many('veterinary.xr','animal',readonly=True)
 
     _sql_constraints = [
     ('microchio_uniq', 'unique(microchip_number)', 'Microchip already exists!')

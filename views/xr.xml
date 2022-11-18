@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    
     <data>
 
         <record model="ir.actions.act_window" id="xr_list_action">
@@ -32,12 +33,17 @@
                     <sheet>
                         <group>
                             <group>                      
-                                <field name="owner_id" domain="[('customer', '=' ,True)]"/>
-                                <field name="animal" domain="[('partner_id','=',owner_id)]"/>   
-                                <field name="appointment_id" domain="[('partner_id','=',owner_id)]"/>
+                                <field name="partner_id" domain="[('customer', '=' ,True)]"/>
+                                <field name="animal" domain="[('partner_id','=',partner_id)]"/>   
+                                <field name="appointment_id" domain="[('partner_id','=',partner_id)]"/>
                                 <field name="user_id" />
                             </group>
-                        </group>                        
+                        </group> 
+                        <group> 
+                           
+                            <field name="image" widget="image"/>
+                            
+                        </group>                       
                         <notebook>
                            <page string="XR Exam">
                                 <group>

@@ -3,6 +3,7 @@
 from odoo import models, fields, api, _
 from odoo import tools
 
+
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
     
@@ -21,6 +22,8 @@ class Appointment(models.Model):
     partner_id = fields.Many2one('res.partner',string='Owner',required=True)
     dateOfAppointment = fields.Datetime('Date of Appointment',required=True)
     animals = fields.Many2many('veterinary.animal',string='Animals')
+    evaluation_id = fields.One2many('veterinary.evaluation', 'name', string='Evaluation')
+    telephone = fields.Char(related='partner_id.mobile')
     animal_id = fields.Many2one('veterinary.animal')
     user_id = fields.Many2one('res.users', string='Doctor',required=True,track_visibility='onchange',default=lambda self: self.env.user)
     cancel_reason = fields.Text('Reason of cancellation')
@@ -29,6 +32,7 @@ class Appointment(models.Model):
     state = fields.Selection(
         [('draft','Draft'),
         ('confirm','Confirm'),
+        ('done','Done'),
         ('cancel','Cancel')]
         , string='Status', index=True, readonly=True, default='draft',
         track_visibility='onchange', copy=False
@@ -44,10 +48,18 @@ class Appointment(models.Model):
     def action_create_invoice(self):
         for appointment in self:
             inv = {
-            'appointment_id': appointment.id,
-            'partner_id': appointment.partner_id.id,
+            'appointment_id': self._name,
+            'partner_id': self.partner_id.id,
             }
             invoiced = self.env['account.invoice'].create(inv)
+
+    @api.one
+    def action_create_invoice(self):
+        inv = {
+            'appointment_id': self._name,
+            'partner_id': self.partner_id.id,
+            }
+        invoiced = self.env['account.invoice'].create(inv)
     
     @api.multi
     def _total_count(self):
@@ -75,4 +87,9 @@ class Appointment(models.Model):
             }
             picking = self.env['veterinary.evaluation'].create(pick)
         return self.invoice_view()
+
+    @api.one
+    def action_done(self):
+        self.state = 'done'
+        
     

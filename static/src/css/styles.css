@@ -1,23 +1,46 @@
-.odoo button.oe_highlight {    
-  background-color: #0080FF;    
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#7A36D9), to(#7A36D9));    
-  background-image: -webkit-linear-gradient(top, #7A36D9, #7A36D9);   
-  background-image: -moz-linear-gradient(top, #7A36D9, #7A36D9);    
-  background-image: -ms-linear-gradient(top, #7A36D9, #7A36D9);    
-  background-image: -o-linear-gradient(top, #7A36D9, #7A36D9);    
-  background-image: linear-gradient(to bottom, #7A36D9, #7A36D9);    
+.greenbutton{    
+  width: 60px;
+  background-color: lightgreen;
+  border-radius: 5px;      
+  background-image: -webkit-linear-gradient(top, lightgreen, lightgreen);   
+  background-image: -moz-linear-gradient(top, lightgreen, lightgreen);    
+  background-image: -ms-linear-gradient(top, lightgreen, lightgreen);    
+  background-image: -o-linear-gradient(top, lightgreen, lightgreen);    
+  background-image: linear-gradient(to bottom, lightgreen, lightgreen);    
   -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(155, 155, 155, 0.4) inset;   
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(155, 155, 155, 0.4) inset;    
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(155, 155, 155, 0.4) inset;    
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(155, 155, 155, 0.4) inset;
+  margin:0;    
+}
+.redbutton{    
+  width: 60px;
+  background-color: lightcoral;
+  border-radius: 5px;      
+  background-image: -webkit-linear-gradient(top, lightcoral, lightcoral);   
+  background-image: -moz-linear-gradient(top, lightcoral, lightcoral);    
+  background-image: -ms-linear-gradient(top, lightcoral, lightcoral);    
+  background-image: -o-linear-gradient(top, lightcoral, lightcoral);    
+  background-image: linear-gradient(to bottom, lightcoral, lightcoral);    
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(155, 155, 155, 0.4) inset;   
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(155, 155, 155, 0.4) inset;    
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(155, 155, 155, 0.4) inset;  
+   margin:0;      
+}
+.redbutton:hover {    
+  width: 60px;
+  background-color: white;  
+  border-radius: 5px;   
+  background-image: -webkit-linear-gradient(top, white, white);    
+  background-image: -moz-linear-gradient(top, white, white);    
+  background-image: -ms-linear-gradient(top, white, white);
+  background-image: -o-linear-gradient(top, white, white);
+  background-image: linear-gradient(to bottom, white, white);
+   margin:0;    
 }
 
-.odoo button.oe_highlight:hover {    
-  background-color: #c63939;   
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#4436D9), to(#4436D9));  
-  background-image: -webkit-linear-gradient(top, #4436D9, #4436D9);    
-  background-image: -moz-linear-gradient(top, #4436D9, #4436D9);    
-  background-image: -ms-linear-gradient(top, #4436D9, #4436D9);
-  background-image: -o-linear-gradient(top, #4436D9, #4436D9);
-  background-image: linear-gradient(to bottom, #4436D9, #4436D9);
-
+.tree_buttons [data-id="action_cancel_appointment"] {
+    width: 60px;
+}
+.tree_buttons [data-id="action_create_invoice"] {
+    width: 60px;
 }

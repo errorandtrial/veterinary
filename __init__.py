@@ -1,2 +1,3 @@
-from . import AppointmentWizard
-from . import mail_compose_message
+# -*- coding: utf-8 -*-
+from . import models
+from . import wizard

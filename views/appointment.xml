@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        
 
         <record id="account_invoice_appointment" model="ir.ui.view">
             <field name="name">Appointment</field>
@@ -18,6 +19,33 @@
             <field name="res_model">veterinary.appointment</field>
             <field name="view_type">form</field>
             <field name="view_mode">calendar,tree,form</field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="waitingroom_list_action">
+            <field name="name">Waitingroom</field>
+            <field name="res_model">veterinary.appointment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="waitingroom_tree_view">
+            <field name="name">veterinary.appointment.tree</field>
+            <field name="model">veterinary.appointment</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Appointment Tree" class="tree_buttons" >
+                    <button name="action_cancel_appointment" states="draft,confirm" string="Cancel" type="object" class="greenbutton"/>
+                    <button name="action_confirm" states="draft" string="Confirm"  type="object" class="greenbutton"/> 
+                    <button name="action_done" states="confirm" string="Done" type="object" class="redbutton"/>    
+                    <button name="action_create_invoice" states="done" string="Invoice" type="object" class="redbutton"/>                             
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="dateOfAppointment"/>
+                    <field name="partner_id"/>
+                    <field name="user_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
         </record>
 
         <record model="ir.ui.view" id="appointment_calendar_view">
@@ -37,9 +65,13 @@
         <record model="ir.ui.view" id="appointment_tree_view">
             <field name="name">veterinary.appointment.tree</field>
             <field name="model">veterinary.appointment</field>
+            <field name="type">tree</field>
             <field name="arch" type="xml">
-                <tree string="Appointment Tree" decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
-                    <button name="action_confirm" string="Confirm" states="draft" type="object" class="oe_highlight"/>                    
+                <tree string="Appointment Tree" class="tree_buttons" >
+                    <button name="action_cancel_appointment" string="Cancel" states="draft,confirm" type="object" class="oe_highlight"/>
+                    <button name="action_confirm" string="Confirm" states="draft" type="object" class="oe_highlight"/> 
+                    <button name="action_done" states="confirm" string="Done" type="object" class="oe_highlight"/>    
+                    <button name="action_create_invoice" states="done" string="Invoice" type="object" class="oe_highlight"/>                             
                     <field name="name"/>
                     <field name="description"/>
                     <field name="dateOfAppointment"/>
@@ -57,7 +89,6 @@
                 <form string="Appointment Form">
                     <header>
                         <button name="action_create_invoice" invisible='1' states="confirm" string="Create Invoice" type="object"/>
-                        <button name="action_confirm" string="Confirm" states="draft" type="object" class="oe_highlight"/>
                         <button name="%(action_account_cancel_appointment)d" states="draft,confirm" string="Cancel" type="action"/>
                         <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,confirm,cancel"/>
                     </header>
@@ -81,6 +112,8 @@
                             <group>
                                 <field name="dateOfAppointment"/>
                                 <field name="partner_id" domain="[('customer', '=', True)]"/>
+                                 <field name="telephone"/>
+                        
                             </group>
                             <group>
                                 <field name="description"/>

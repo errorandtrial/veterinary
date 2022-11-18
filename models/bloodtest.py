@@ -15,7 +15,7 @@ class BloodTest(models.Model):
     _order = "date desc"
     name = fields.Char(string='Test ID', required=True, copy=False, readonly=True,index=True, default=lambda self: _('New'))
     animal = fields.Many2one('veterinary.animal')
-    partner_id = fields.Many2one('res.partner', string='Owner', required=True)
+    owner_id = fields.Many2one('res.partner', string='Owner', required=True)
     appointment_id = fields.Many2one('veterinary.appointment',string='Appointment',required=True)
     date = fields.Datetime(string='Date', related='appointment_id.dateOfAppointment')
     user_id = fields.Many2one('res.users', string='Doctor')
@@ -33,38 +33,38 @@ class BloodTest(models.Model):
         return res
 
     
-    @api.multi
-    def action_bloodtest_sent(self):
-        '''
-        This function opens a window to compose an email, with the edi sale template message loaded by default
-        '''
-        self.ensure_one()
-        ir_model_data = self.env['ir.model.data']
-        try:
-            template_id = ir_model_data.get_object_reference('veterinary', 'email_template_test_sale')[1]
-        except ValueError:
-            template_id = False       
-        ctx = {
-            'default_model': 'veterinary.bloodtest',
-            'default_res_id': self.ids[0],
-            'default_use_template': bool(template_id),
-            'default_template_id': template_id,
-            'default_composition_mode': 'comment',
-            'mark_so_as_sent': True,
-            'custom_layout': "veterinary.email_template_test_sale",
-            'proforma': self.env.context.get('proforma', False),
-            'force_email': True
-        }
-        return {
-            'type': 'ir.actions.act_window',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'mail.compose.message',
-            # 'views': [(compose_form_id, 'form')],
-            # 'view_id': compose_form_id,
-            'target': 'new',
-            'context': ctx,
-        }
+    # @api.multi
+    # def action_analitica_sent(self):
+    #     '''
+    #     This function opens a window to compose an email, with the edi sale template message loaded by default
+    #     '''
+    #     self.ensure_one()
+    #     ir_model_data = self.env['ir.model.data']
+    #     try:
+    #         template_id = ir_model_data.get_object_reference('veterinary', 'email_template_edi_sale')[1]
+    #     except ValueError:
+    #         template_id = False       
+    #     ctx = {
+    #         'default_model': 'veterinary.analitica',
+    #         'default_res_id': self.ids[0],
+    #         'default_use_template': bool(template_id),
+    #         'default_template_id': template_id,
+    #         'default_composition_mode': 'comment',
+    #         'mark_so_as_sent': True,
+    #         'custom_layout': "veterinary.mail_template_data_notification_email_sale_order",
+    #         'proforma': self.env.context.get('proforma', False),
+    #         'force_email': True
+    #     }
+    #     return {
+    #         'type': 'ir.actions.act_window',
+    #         'view_type': 'form',
+    #         'view_mode': 'form',
+    #         'res_model': 'mail.compose.message',
+    #         # 'views': [(compose_form_id, 'form')],
+    #         # 'view_id': compose_form_id,
+    #         'target': 'new',
+    #         'context': ctx,
+    #     }
 
 # class MailComposeMessage(models.TransientModel):
 #     _inherit = 'mail.compose.message'

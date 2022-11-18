@@ -3,7 +3,6 @@
 from odoo import models, fields, api, _
 from odoo import tools
 
-
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
     
@@ -22,7 +21,6 @@ class Appointment(models.Model):
     partner_id = fields.Many2one('res.partner',string='Owner',required=True)
     dateOfAppointment = fields.Datetime('Date of Appointment',required=True)
     animals = fields.Many2many('veterinary.animal',string='Animals')
-    telephone = fields.Char(related='partner_id.mobile')
     animal_id = fields.Many2one('veterinary.animal')
     user_id = fields.Many2one('res.users', string='Doctor',required=True,track_visibility='onchange',default=lambda self: self.env.user)
     cancel_reason = fields.Text('Reason of cancellation')
@@ -50,14 +48,6 @@ class Appointment(models.Model):
             'partner_id': appointment.partner_id.id,
             }
             invoiced = self.env['account.invoice'].create(inv)
-
-    @api.one
-    def action_create_invoice(self):
-        inv = {
-            'appointment_id': appointment.id,
-            'partner_id': appointment.partner_id.id,
-            }
-        invoiced = self.env['account.invoice'].create(inv)
     
     @api.multi
     def _total_count(self):

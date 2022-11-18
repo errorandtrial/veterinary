@@ -5,20 +5,17 @@
     <!-- Top menu item -->
     <!-- menu categories -->
     <menuitem id="main_animal_menu" name="Veterinary Clinic" groups="veterinary.group_veterinary_user"/>
-    <menuitem id="animal_menu" name="Animal" parent="main_animal_menu" sequence ="1"/>
-    <menuitem id="animal_view" name="Animal" parent="animal_menu" action="animal_list_action" sequence = "2"/>
-    <menuitem id="menu_animal_customer" name="Owners" parent="animal_menu" action="base.action_partner_customer_form" sequence="3"/>
-    <menuitem id="main_clinic_menu" name="Clinic"  parent="main_animal_menu" sequence="4"/>
-    <menuitem id="appointment_view" name="Appointments" parent="main_clinic_menu" action="appointment_list_action" sequence="5"/>
-    <menuitem id="waitingroom" name="Waiting Room" parent="main_clinic_menu" action="waitingroom_list_action" sequence="6"/>
-    <menuitem id="evaluation_view" name="Veterinary Evaluation" parent="main_clinic_menu" action="evaluation_list_action" sequence="7"/>
-    <menuitem id="test_view" name="Clinical Tests" parent="main_animal_menu" sequence="8"/>
-    <menuitem id="bloodtest_view" name="Blood tests" parent="test_view" action="bloodtest_list_action" sequence="9"/>
-    <menuitem id="xr_view" name="Radiology" parent="test_view" action="xr_list_action" sequence="10"/>
-    <menuitem id="echo_view" name="Echography" parent="test_view" action="echo_list_action" sequence="11"/>
-    <menuitem id="citology_view" name="Citology" parent="test_view" action="citology_list_action" sequence="12"/>
-    <menuitem id="veterinary_configuration" name="Configuration" parent="main_animal_menu" sequence="13"/>
-    <menuitem id="evaluation_stage" name="Evaluation Stage" parent="veterinary_configuration" action="evaluation_stage_list_action" sequence="14"/>
-    <menuitem id="code" name="Code dictionary" parent="veterinary_configuration" action="code_list_action" sequence="15"/>
+    <menuitem id="animal_menu" name="Animal" parent="main_animal_menu" />
+    <menuitem id="animal_view" name="Animal" parent="animal_menu" action="animal_list_action" />
+    <menuitem id="menu_animal_customer" name="Owners" parent="animal_menu" action="base.action_partner_customer_form" sequence="100"/>
+    <menuitem id="appointment_view" name="Appointment" parent="main_animal_menu" action="appointment_list_action"/>
+    <menuitem id="evaluation_view" name="Veterinary Evaluation" parent="main_animal_menu" action="evaluation_list_action"/>
+    <menuitem id="test_view" name="Clinical Tests" parent="main_animal_menu"/>
+    <menuitem id="bloodtest_view" name="Blood tests" parent="test_view" action="bloodtest_list_action"/>
+    <menuitem id="xr_view" name="Radiology" parent="test_view" action="xr_list_action"/>
+    <menuitem id="echo_view" name="Echography" parent="test_view" action="echo_list_action"/>
+    <menuitem id="citology_view" name="Citology" parent="test_view" action="citology_list_action"/>
+    <menuitem id="veterinary_configuration" name="Configuration" parent="main_animal_menu" />
+    <menuitem id="evaluation_stage" name="Evaluation Stage" parent="veterinary_configuration" action="evaluation_stage_list_action"/>
   </data>
 </odoo>

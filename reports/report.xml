@@ -6,7 +6,7 @@
      <t t-call="web.external_layout">
         <!-- <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" /> -->
         <div class="page">
-            <h2>Consultation Report</h2>
+            
             <strong>Appointment:</strong>
             <span t-field="doc.appointment_id"/><br/>
             <strong>Stage:</strong>
@@ -20,31 +20,7 @@
             <strong>Colour: </strong> <span t-field="doc.animal.colour"/>
             <strong>Owner: </strong> <span t-field="doc.animal.partner_id"/>
             <br/>
-            <strong>Cause of consultation: </strong> <span t-field="doc.description"/>
-            <br/>
-            <strong>Current illness: </strong> <span t-field="doc.current_illness"/>
-            <br/> <br/>  
-            <strong>Conditions: </strong> 
-            <br/>
-            <t t-foreach="doc.conditions"   t-as="line">
-                    <span t-esc="line.name"/><br/>                
-            </t>
-            <br/> 
-            <br/> 
-             <strong>Procedures: </strong> 
-            <br/>
-            <t t-foreach="doc.procedures"   t-as="line">
-                    <span t-esc="line.name"/><br/>              
-            </t>
-            <br/> 
-            <br/> 
-             <strong>Prescriptions: </strong> 
-            <br/>
-            <t t-foreach="doc.prescriptions"   t-as="line">
-                    <span t-esc="line.name"/><br/>                
-            </t>
-            <br/> 
-            <!-- <strong>Codes: </strong> <span t-field="doc.codes.name"/> -->
+            
             <table class="table table-condensed mt0" >
                 <thead>
                     <tr>

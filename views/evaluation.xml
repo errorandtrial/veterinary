@@ -16,7 +16,6 @@
                 <tree string="Evaluation Tree" create="false">
                     <field name="animal"/>
                     <field name="appointment_id"/>
-                    <field name="description"/>
                 </tree>
             </field>
         </record>
@@ -35,15 +34,12 @@
                                 <field name="animal"/>
                                 <field name="stage_id"/>
                                 <field name="partner_id" domain="[('customer', '=' ,True)]"/>
-                            </group>                            
-                        </group>
-                        <group>
+                            </group>
+                            <group>
                                 <field name="appointment_id" domain="[('state', '!=' ,'cancel'),('partner_id','=',partner_id)]"/>
-                                <field name="description"/>
-                                <field name="current_illness"/>
+                            </group>
                         </group>
                         <notebook>
-                            
                             <page string="Musculoskeletal">
                                 <group>
                                     <group>
@@ -135,19 +131,7 @@
                                 </group>
                             </page>
                         </notebook>
-                        <group>                                    
-                            <field name="conditions">
-                            </field>
-                        </group>                               
-                        <group>                                    
-                            <field name="procedures">
-                            </field>
-                        </group>
-                        <group>                                    
-                            <field name="prescriptions">
-                            </field>
-                        </group>
-                        <group>                            
+                        <group>
                             <field name="other"/>
                             <field name="overall_assessment"/>
                             <field name="recommendations"/>
@@ -168,7 +152,6 @@
             <field name="arch" type="xml">
                 <kanban default_group_by="stage_id" class="o_kanban_small_column" create="false">
                     <field name="appointment_id"/>
-                    <field name="description"/>
                     <field name="animal"/>
                     <field name="partner_id"/>
                     <field name="stage_id"/>
@@ -206,11 +189,6 @@
                                     <div>
                                         <strong>
                                             <field name="animal"/>
-                                        </strong>
-                                    </div>
-                                     <div>
-                                        <strong>
-                                            <field name="description"/>
                                         </strong>
                                     </div>
                                 </div>

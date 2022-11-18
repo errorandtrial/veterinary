@@ -9,7 +9,7 @@
             <field name="model_id" ref="veterinary.model_veterinary_evaluation"/>
             <field name="auto_delete" eval="True"/>
             <field name="report_template" ref="action_report_s"/>
-            <field name="report_name">${(object.name or '').replace('/','_')}</field>
+            <field name="report_name">Evaluation${(object.name or '').replace('/','_')}</field>
             <field name="lang">${object.partner_id.lang}</field>
 
             <field name="body_html"><![CDATA[
@@ -39,118 +39,5 @@ Here is your ${doc_name} <strong>${object.name}</strong>
 ]]></field>
              
         </record>
-
-                <record id="email_template_citology" model="mail.template">
-            <field name="name">Citology - Send by Email</field>
-            <field name="email_from">${(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}</field>
-            <field name="partner_to">${object.partner_id.id}</field>
-            <field name="model_id" ref="veterinary.model_veterinary_citology"/>
-            <field name="auto_delete" eval="True"/>
-            <field name="report_template" ref="action_report_c"/>
-            <field name="report_name">${(object.name or '').replace('/','_')}</field>
-            <field name="lang">${object.partner_id.lang}</field>
-
-            <field name="body_html"><![CDATA[
-<p>Dear
-Here is your ${doc_name} <strong>${object.name}</strong>
-
-</p>
-
-    <br/><br/>
-% if is_online:
-    <center>
-        <a href="${access_url}" style="background-color: #1abc9c; padding: 20px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 16px;" class="o_default_snippet_text">${access_name}</a>
-        <br/><br/>
-        <span style="color:#888888">(or view attached PDF)</span>
-    </center>
-    <br/>
-% endif
-
-<p>You can reply to this email if you have any questions.</p>
-<p>Thank you,</p>
-
-<p style="color:#eeeeee;">
-% if object.user_id and object.user_id.signature:
-    ${object.user_id.signature | safe}
-% endif
-</p>
-]]></field>
-             
-        </record>
-                <record id="email_template_radiology" model="mail.template">
-            <field name="name">Radiology - Send by Email</field>
-            <field name="email_from">${(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}</field>
-            <field name="partner_to">${object.partner_id.id}</field>
-            <field name="model_id" ref="veterinary.model_veterinary_xr"/>
-            <field name="auto_delete" eval="True"/>
-            <field name="report_template" ref="action_report_x"/>
-            <field name="report_name">${(object.name or '').replace('/','_')}</field>
-            <field name="lang">${object.partner_id.lang}</field>
-
-            <field name="body_html"><![CDATA[
-<p>Dear
-Here is your ${doc_name} <strong>${object.name}</strong>
-
-</p>
-
-    <br/><br/>
-% if is_online:
-    <center>
-        <a href="${access_url}" style="background-color: #1abc9c; padding: 20px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 16px;" class="o_default_snippet_text">${access_name}</a>
-        <br/><br/>
-        <span style="color:#888888">(or view attached PDF)</span>
-    </center>
-    <br/>
-% endif
-
-<p>You can reply to this email if you have any questions.</p>
-<p>Thank you,</p>
-
-<p style="color:#eeeeee;">
-% if object.user_id and object.user_id.signature:
-    ${object.user_id.signature | safe}
-% endif
-</p>
-]]></field>
-             
-        </record>
-        <record id="email_template_test_sale" model="mail.template">
-            <field name="name">Blood test - Send by Email</field>
-            <field name="email_from">${(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}</field>
-            <field name="partner_to">${object.partner_id.id}</field>
-            <field name="model_id" ref="veterinary.model_veterinary_bloodtest"/>
-            <field name="auto_delete" eval="True"/>
-            <field name="report_template" ref="action_report_r"/>
-            <field name="report_name">${(object.name or '').replace('/','_')}</field>
-            <field name="lang">${object.partner_id.lang}</field>
-
-            <field name="body_html"><![CDATA[
-<p>Dear
-Here is your ${doc_name} <strong>${object.name}</strong>
-
-</p>
-
-    <br/><br/>
-% if is_online:
-    <center>
-        <a href="${access_url}" style="background-color: #1abc9c; padding: 20px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 16px;" class="o_default_snippet_text">${access_name}</a>
-        <br/><br/>
-        <span style="color:#888888">(or view attached PDF)</span>
-    </center>
-    <br/>
-% endif
-
-<p>You can reply to this email if you have any questions.</p>
-<p>Thank you,</p>
-
-<p style="color:#eeeeee;">
-% if object.user_id and object.user_id.signature:
-    ${object.user_id.signature | safe}
-% endif
-</p>
-]]></field>
-             
-        </record>
-
     </data>
 </odoo>

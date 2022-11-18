@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+<template id="report_citology_document">
+     <t t-call="web.external_layout">
+        <!-- <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" /> -->
+        <div class="page">            
+            <strong>Name:</strong>
+            <span t-field="doc.name"/><br/>
+            <strong>Animal:</strong>
+            <span t-field="doc.animal"/>
+            <strong>NO: </strong> <span t-field="doc.animal.microchip_number"/>
+            <strong>Sex: </strong> <span t-field="doc.animal.sex"/>
+            <strong>Age: </strong> <span t-field="doc.animal.age"/>
+            <strong>Bread and Use: </strong> <span t-field="doc.animal.bread"/>
+            <strong>Colour: </strong> <span t-field="doc.animal.colour"/>
+            <strong>Owner: </strong> <span t-field="doc.animal.partner_id"/>           
+            <br/>
+            <strong>Sample: </strong> <span t-field="doc.sample"/>
+            <br/>
+            <strong>Preparation: </strong> <span t-field="doc.preparation"/>  
+             <br/>          
+            <strong>Image:</strong>
+            <t t-foreach="doc.image"   t-as="line">
+            <span t-esc="line" t-options='{"widget": "image"}'/><br/>                
+            </t>           
+        </div>
+    </t>
+</template>
+
+
+<template id="report_citology">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="veterinary.report_citology_document"/>
+        </t>
+    </t>
+</template>
+        <report 
+            id="action_report_c"
+            string="Veterinary citology"
+            model="veterinary.citology" 
+            report_type="qweb-pdf"
+            file="veterinary.report_citology" 
+            name="veterinary.report_citology"
+        />
+
+
+    </data>
+</odoo>

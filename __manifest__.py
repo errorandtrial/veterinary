@@ -18,6 +18,8 @@
 
     # always loaded
     'data': [
+    
+        'views/css_loader.xml', 
         'views/seq.xml',
         'security/security.xml',
         'security/ir.model.access.csv',
@@ -30,9 +32,13 @@
         'views/bloodtest.xml',   
         'views/xr.xml',  
         'views/echo.xml',            
-        'views/citology.xml',  
-        'views/menu.xml',   
+        'views/citology.xml',      
+        'views/code.xml',  
+        'views/menu.xml',     
         'reports/report.xml',
+        'reports/citology_report.xml',
+        'reports/xr_report.xml',
+        'reports/bloodtest_report.xml',
         'views/email_templates.xml',
         'data/evaluation_stage.xml',
     ],

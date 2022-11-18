@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="code_list_action">
+            <field name="name">Code</field>
+            <field name="res_model">veterinary.code</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="code_tree_view">
+            <field name="name">code.tree</field>
+            <field name="model">veterinary.code</field>
+            <field name="arch" type="xml">
+                <tree string="Stage Tree">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="category"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="condition_tree_view">
+            <field name="name">code.condition.tree</field>
+            <field name="model">veterinary.code</field>
+            <field name="arch" type="xml">
+                <tree string="Conditions">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="category"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="procedure_tree_view">
+            <field name="name">code.procedure.tree</field>
+            <field name="string">'Procedures'</field>
+            <field name="model">veterinary.code</field>
+            <field name="arch" type="xml">
+                <tree string="Procedures">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="category"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="drug_tree_view">
+            <field name="name">code.drugtree</field>
+            <field name="model">veterinary.code</field>
+            <field name="arch" type="xml">
+                <tree string="Drugs" decoration-muted="category=='Drug'" >
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="category"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="code_form_view">
+            <field name="name">code.form</field>
+            <field name="model">veterinary.code</field>
+            <field name="arch" type="xml">
+                <form string="Stage Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="category"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

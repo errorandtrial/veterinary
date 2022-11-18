@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="account_invoice_appointment" model="ir.ui.view">
+            <field name="name">Appointment</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='other_info']/group/group" position="inside">
+                    <field name="appointment_id" domain="[('partner_id','=',partner_id)]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="appointment_list_action">
+            <field name="name">Appointment</field>
+            <field name="res_model">veterinary.appointment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">calendar,tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="appointment_calendar_view">
+            <field name="name">veterinary.appointment.calendar</field>
+            <field name="model">veterinary.appointment</field>
+            <field name="arch" type="xml">
+                <calendar string="Appointment Calendar" date_start="dateOfAppointment" color="user_id" quick_add="False">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="user_id"/>
+                    <field name="state"/>                    
+                </calendar>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="appointment_tree_view">
+            <field name="name">veterinary.appointment.tree</field>
+            <field name="model">veterinary.appointment</field>
+            <field name="arch" type="xml">
+                <tree string="Appointment Tree" decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                    <button name="action_confirm" string="Confirm" states="draft" type="object" class="oe_highlight"/>                    
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="dateOfAppointment"/>
+                    <field name="partner_id"/>
+                    <field name="user_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="appointment_form_view">
+            <field name="name">veterinary.appointment.form</field>
+            <field name="model">veterinary.appointment</field>
+            <field name="arch" type="xml">
+                <form string="Appointment Form">
+                    <header>
+                        <button name="action_create_invoice" invisible='1' states="confirm" string="Create Invoice" type="object"/>
+                        <button name="action_confirm" string="Confirm" states="draft" type="object" class="oe_highlight"/>
+                        <button name="%(action_account_cancel_appointment)d" states="draft,confirm" string="Cancel" type="action"/>
+                        <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,confirm,cancel"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object" name="invoice_view" class="oe_stat_button" icon="fa-pencil-square-o" context="{
+                                        'search_default_partner_id':[partner_id],
+                                        }">
+                                <div class="o_form_field o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="total_invoiced"/>
+                                    </span>
+                                    <span class="o_stat_text">Invoices</span>
+                                </div>
+                            </button>
+                        </div>
+                        <h1 class="mt0">
+                            <field name="name" /> 
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="dateOfAppointment"/>
+                                <field name="partner_id" domain="[('customer', '=', True)]"/>
+                            </group>
+                            <group>
+                                <field name="description"/>
+                                <field name="user_id"/>
+                            </group>
+
+                        </group>
+                        <tree string="Animals">
+                            <field name="animals" options="{'no_create': True, 'no_open': True}" domain="[('partner_id', '=' ,partner_id)]" />
+                        </tree>
+                        <group>
+                            <field name="cancel_reason" states="cancel" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="appointment_search_view">
+            <field name="name">veterinary.appointment.search</field>
+            <field name="model">veterinary.appointment</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="dateOfAppointment"/>
+                    <field name="user_id"/>
+                    <group string="Group By">
+                        <filter name="group_by_partner_id" string="Owner" context="{'group_by': 'partner_id'}"/>
+                        <filter name="group_by_user_id" string="Doctor" context="{'group_by': 'user_id'}"/>
+                        <filter name="group_by_state" string="State" context="{'group_by': 'state'}"/>
+                        <filter name="group_by_appointment_id" string="Appointment ID" context="{'group_by': 'appointment_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+
+        <record id="action_appointment_form" model="ir.actions.act_window">
+            <field name="name">Animal</field>
+            <field name="res_model">veterinary.appointment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="appointment_search_view"/>
+            <field name="view_id" ref="appointment_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+
+                </p>
+            </field>
+        </record>
+        <!-- Appointment cancel Reason Action Button -->
+        <record id="account_invoice_confirm_view" model="ir.ui.view">
+            <field name="name">veterinary.appointment.confirm.form</field>
+            <field name="model">veterinary.appointment.confirm</field>
+            <field name="arch" type="xml">
+                <form string="Confirm Draft Invoices">
+                    <p class="oe_grey">
+                        Confirm draft appointment
+                    </p>
+                    <footer>
+                        <button string="Confirm appointments" name="appointment_confirm" type="object" default_focus="1" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_veterinary_cancel_appointment" name="Cancel Appointment" res_model="cancel.appoint.wizard" src_model="veterinary.appointment" view_mode="form" multi="True" target="new" key2="client_action_multi" />
+
+        <act_window id="action_veterinary_appointment_confirm" multi="True" key2="client_action_multi" name="Confirm Draft Appointment" res_model="veterinary.appointment.confirm" src_model="veterinary.appointment" view_mode="form" target="new" view_type="form" />
+
+    </data>
+</odoo>

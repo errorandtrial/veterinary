@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Load css File -->
+    <template id="my_custom_css_asset" name="my_custom_css assets" inherit_id="web.assets_backend">
+      <xpath expr="." position="inside">
+        <link rel="stylesheet" href="/veterinary/static/src/css/styles.css"/>
+      </xpath>
+    </template>
+  </data>
+</odoo>

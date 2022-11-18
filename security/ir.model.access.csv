@@ -7,6 +7,8 @@ access_bloodtest_user,veterinary.bloodtest user,veterinary.model_veterinary_bloo
 access_bloodtest_manager,veterinary.bloodtest manager,veterinary.model_veterinary_bloodtest,veterinary.group_veterinary_manager,1,1,1,1
 access_citology_user,veterinary.citology user,veterinary.model_veterinary_citology,veterinary.group_veterinary_user,1,1,1,0
 access_citology_manager,veterinary.citology manager,veterinary.model_veterinary_citology,veterinary.group_veterinary_manager,1,1,1,1
+access_code_user,veterinary.code user,veterinary.model_veterinary_code,veterinary.group_veterinary_user,1,0,0,0
+access_code_manager,veterinary.code manager,veterinary.model_veterinary_code,veterinary.group_veterinary_manager,1,1,1,1
 access_echo_user,veterinary.echo user,veterinary.model_veterinary_echo,veterinary.group_veterinary_user,1,1,1,0
 access_echo_manager,veterinary.echo manager,veterinary.model_veterinary_echo,veterinary.group_veterinary_manager,1,1,1,1
 access_evaluation_user,veterinary.evaluation user,model_veterinary_evaluation,veterinary.group_veterinary_user,1,1,0,0

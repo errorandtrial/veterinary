@@ -22,13 +22,19 @@ class Evaluation(models.Model):
     def _read_group_stage_ids(self,stages,domain,order):
         stage_ids = self.env['veterinary.evaluation.stages'].search([])
         return stage_ids
-    
+
     name =fields.Char('Name',compute='_compute_name')
     animal = fields.Many2one('veterinary.animal', required=True,string='Animal',readonly=True)
     appointment_id = fields.Many2one('veterinary.appointment',string='Appointment',required=True)
+    description  = fields.Char(string="Reason for consultation", store=True, related='appointment_id.description')
+
+    current_illness = fields.Text('Current illness')
     stage_id = fields.Many2one('veterinary.evaluation.stages',string='Stage',required=True,default=default_stage,group_expand='_read_group_stage_ids')
     user_id = fields.Many2one('res.users', string='Doctor', index=True, track_visibility='onchange', default=lambda self: self.env.user)
     partner_id = fields.Many2one('res.partner', string='Owner',required=True,readonly=True)
+    conditions = fields.Many2many('veterinary.code', 'cod_eval_rel',  'name', 'code', domain="[('category', '=', 'Condition')]")
+    procedures = fields.Many2many('veterinary.code', 'proc_eval_rel',  'name', 'code', domain="[('category', '=', 'Procedure')]")
+    prescriptions = fields.Many2many('product.product', 'prod_eval_rel',  'name', 'product_id')
     
     # Musculoskeletal System Page
     conformation = fields.Char('Conformation')
@@ -108,7 +114,7 @@ class Evaluation(models.Model):
             'default_template_id': template_id,
             'default_composition_mode': 'comment',
             'mark_so_as_sent': True,
-            'custom_layout': "veterinary.mail_template_data_notification_email_sale_order",
+            'custom_layout': "veterinary.email_template_edi_sale",
             'proforma': self.env.context.get('proforma', False),
             'force_email': True
         }
@@ -127,12 +133,12 @@ class EvaluationStages(models.Model):
     _name = 'veterinary.evaluation.stages'
     name = fields.Char('Stage')
 
-class MailComposeMessage(models.TransientModel):
-    _inherit = 'mail.compose.message'
+# class MailComposeMessage(models.TransientModel):
+#     _inherit = 'mail.compose.message'
 
-    @api.multi
-    def send_mail(self, auto_commit=False):
-        if self._context.get('default_model') == 'veterinary.evaluation' and self._context.get('default_res_id') and self._context.get('mark_so_as_sent'):
-            order = self.env['veterinary.evaluation'].browse([self._context['default_res_id']])
-            self = self.with_context(mail_post_autofollow=True)
-        return super(MailComposeMessage, self).send_mail(auto_commit=auto_commit)
+#     @api.multi
+#     def send_mail(self, auto_commit=False):
+#         if self._context.get('default_model') == 'veterinary.evaluation' and self._context.get('default_res_id') and self._context.get('mark_so_as_sent'):
+#             order = self.env['veterinary.evaluation'].browse([self._context['default_res_id']])
+#             self = self.with_context(mail_post_autofollow=True)
+#         return super(MailComposeMessage, self).send_mail(auto_commit=auto_commit)

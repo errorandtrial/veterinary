@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+<template id="report_xr_document">
+     <t t-call="web.external_layout">
+        <!-- <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" /> -->
+        <div class="page">
+            
+            <strong>Name:</strong>
+            <span t-field="doc.name"/><br/>
+            <strong>Animal:</strong>
+            <span t-field="doc.animal"/>
+            <strong>NO: </strong> <span t-field="doc.animal.microchip_number"/>
+            <strong>Sex: </strong> <span t-field="doc.animal.sex"/>
+            <strong>Age: </strong> <span t-field="doc.animal.age"/>
+            <strong>Bread and Use: </strong> <span t-field="doc.animal.bread"/>
+            <strong>Colour: </strong> <span t-field="doc.animal.colour"/>
+            <strong>Owner: </strong> <span t-field="doc.animal.partner_id"/>
+           
+            <br/>
+            <strong>Projection: </strong> <span t-field="doc.xr_projection"/>
+            <br/>
+            <strong>Findings: </strong> <span t-field="doc.findings_xr"/>
+            <br/>
+            <strong>Image:</strong>
+            <span t-field="doc.image" t-options='{"widget": "image"}'/>
+        </div>
+    </t>
+</template>
+
+
+<template id="report_xr">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="veterinary.report_xr_document"/>
+        </t>
+    </t>
+</template>
+        <report 
+            id="action_report_x"
+            string="Veterinary xr"
+            model="veterinary.xr" 
+            report_type="qweb-pdf"
+            file="veterinary.report_xr" 
+            name="veterinary.report_xr"
+        />
+
+
+    </data>
+</odoo>

@@ -24,9 +24,11 @@
                 <tree string="Animal Tree">
                     <field name="microchip_number"/>
                     <field name="name"/>
-                    <field name="age"/>
+                    <field name="age" />
+                    <field name="dob"/>
                     <field name="colour" />
                     <field name="sex"/>
+                    <field name="species"/>
                     <field name="bread"/>
                     <field name="partner_id"/>
                 </tree>
@@ -60,10 +62,12 @@
                             <group>
                                 <field name="partner_id" domain="[('customer', '=', True)]"/>
                                 <field name="sex"/>
+                                <field name="species"/>
                                 <field name="bread"/>
                             </group>
                             <group>
                                 <field name="age"/>
+                                <field name="dob"/>
                                 <field name="colour" />
                             </group>
                         </group>
@@ -78,7 +82,7 @@
                                 <field name="citology"/>
                             </page>
                             <page string="Echography">
-                                <field name="echography"/>
+                                <field name="echo"/>
                             </page>
                             <page string="Radiology">
                                 <field name="xr"/>

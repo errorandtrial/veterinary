@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+<template id="report_bloodtest_document">
+     <t t-call="web.external_layout">
+        <!-- <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" /> -->
+        <div class="page">
+            
+            <strong>Blood Test:</strong>
+            <span t-field="doc.name"/><br/>
+            <strong>Date:</strong>
+            <span t-field="doc.date"/><br/>
+            <strong>Animal:</strong>
+            <span t-field="doc.animal"/>
+            <strong>NO: </strong> <span t-field="doc.animal.microchip_number"/>
+            <strong>Sex: </strong> <span t-field="doc.animal.sex"/>
+            <strong>Age: </strong> <span t-field="doc.animal.age"/>
+            <strong>Owner: </strong> <span t-field="doc.animal.partner_id"/>
+            <br/>
+            
+            <table class="table table-condensed mt0" >
+                <thead>
+                    <tr>
+                        <th colspan='4'>Blood test</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr>
+                        <td>hematies:</td>
+                        <td><span t-field="doc.hematies"/></td>
+                        <td>platellets:</td>
+                        <td><span t-field="doc.platellets"/></td>
+                    </tr>
+                    <tr>
+                        <td>neutro:</td>
+                        <td><span t-field="doc.neutro"/></td>
+                        <td>linfo:</td>
+                        <td><span t-field="doc.linfo"/></td>
+                    </tr>
+                </tbody>
+            </table>            
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Other:</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr>
+                         <td><span t-field="doc.other_bt"/></td>
+                      </tr>
+                </tbody>
+            </table>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Overall Assessment:</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr>
+                        <td><span t-field="doc.overall_assessment_bt"/></td>
+                    </tr>
+                </tbody>
+            </table>  
+        </div>
+    </t>
+</template>
+
+
+<template id="report_bloodtest">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="veterinary.report_bloodtest_document"/>
+        </t>
+    </t>
+</template>
+        <report 
+            id="bloodtest_report"
+            string="Veterinary Bloodtest"
+            model="veterinary.bloodtest" 
+            report_type="qweb-pdf"
+            file="veterinary.report_bloodtest" 
+            name="veterinary.report_bloodtest"
+        />
+    </data>
+</odoo>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+<template id="report_evaluation_document">
+     <t t-call="web.external_layout">
+        <!-- <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" /> -->
+        <div class="page">
+            
+            <strong>Appointment:</strong>
+            <span t-field="doc.appointment_id"/><br/>
+            <strong>Stage:</strong>
+            <span t-field="doc.stage_id"/><br/>
+            <strong>Animal:</strong>
+            <span t-field="doc.animal"/>
+            <strong>NO: </strong> <span t-field="doc.animal.microchip_number"/>
+            <strong>Sex: </strong> <span t-field="doc.animal.sex"/>
+            <strong>Age: </strong> <span t-field="doc.animal.age"/>
+            <strong>Bread and Use: </strong> <span t-field="doc.animal.bread"/>
+            <strong>Colour: </strong> <span t-field="doc.animal.colour"/>
+            <strong>Owner: </strong> <span t-field="doc.animal.partner_id"/>
+            <br/>
+            
+            <table class="table table-condensed mt0" >
+                <thead>
+                    <tr>
+                        <th colspan='4'>Musculoskeletal</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr>
+                        <td>Conformation:</td>
+                        <td><span t-field="doc.conformation"/></td>
+                        <td>Feet and Shoeing:</td>
+                        <td><span t-field="doc.feet_shoeing"/></td>
+                    </tr>
+                    <tr>
+                        <td>LF:</td>
+                        <td><span t-field="doc.le"/></td>
+                        <td>RF:</td>
+                        <td><span t-field="doc.rf"/></td>
+                    </tr>
+                    <tr>
+                        <td>LH:</td>
+                        <td><span t-field="doc.lh"/></td>
+                        <td>RH:</td>
+                        <td><span t-field="doc.rh"/></td>
+                    </tr>
+                    <tr>
+                        <td>Neck, Back and Pelvis:</td>
+                        <td><span t-field="doc.neck_back_pelvis"/></td>
+                        <td>Flexion tests:</td>
+                        <td><span t-field="doc.flexion_tests"/></td>
+                    </tr>
+                    <tr>
+                        <td>Ridden:</td>
+                        <td><span t-field="doc.ridden"/></td>
+                        <td>Diagnostic Imaging:</td>
+                        <td><span t-field="doc.diagnostic_imaging"/></td>
+                    </tr>
+                    <tr>
+                        <td>Walk:</td>
+                        <td><span t-field="doc.walk"/></td>
+                        <td>Trot:</td>
+                        <td><span t-field="doc.trot"/></td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-condensed mt0">
+                <thead>
+                    <tr>
+                        <th colspan='4'>Respiratory</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr>
+                        <td>General:</td>
+                        <td><span t-field="doc.res_general"/></td>
+                        <td>Upper airway endoscopy:</td>
+                        <td><span t-field="doc.upper_airway_endoscopy"/></td>
+                    </tr>
+                    <tr>
+                        <td>Lung Auscultation:</td>
+                        <td><span t-field="doc.lung_auscultation"/></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-condensed mt0">
+                <thead>
+                    <tr>
+                        <th colspan='4'>Cardiovascular</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr>
+                        <td>General:</td>
+                        <td><span t-field="doc.cardi_general"/></td>
+                        <td>Auscultation:</td>
+                        <td><span t-field="doc.auscultation"/></td>
+                    </tr>
+                    <tr>
+                        <td>ECG:</td>
+                        <td><span t-field="doc.ecg"/></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-condensed mt0">
+                <thead>
+                    <tr>
+                        <th colspan='4'>Gastrointestinal</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr>
+                        <td>General:</td>
+                        <td><span t-field="doc.gest_general"/></td>
+                        <td>Worming History:</td>
+                        <td><span t-field="doc.worming_history"/></td>
+                    </tr>
+                    <tr>
+                        <td>Teeth:</td>
+                        <td><span t-field="doc.teeth"/></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-condensed mt0">
+                <thead>
+                    <tr>
+                        <th colspan='4'>Nervous:</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr>
+                        <td>General:</td>
+                        <td><span t-field="doc.nevr_general"/></td>
+                        <td>Mentation:</td>
+                        <td><span t-field="doc.mentation"/></td>
+                    </tr>
+                    <tr>
+                        <td>Gait:</td>
+                        <td><span t-field="doc.gait"/></td>
+                        <td>Eyes:</td>
+                        <td><span t-field="doc.eyes"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-condensed mt0">
+                <thead>
+                    <tr>
+                        <th colspan='4'>Reproductive Urinary</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr>
+                        <td>Female / Intact Male / Gelding:</td>
+                        <td><span t-field="doc.fig"/></td>
+                        <td>Testicles:</td>
+                        <td><span t-field="doc.testicles"/></td>
+                    </tr>
+                    <tr>
+                        <td>Vulva:</td>
+                        <td><span t-field="doc.vulva"/></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th colspan='4'>Skin</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr>
+                        <td>Scars – Traumatic / Surgical:</td>
+                        <td><span t-field="doc.scars"/></td>
+                        <td>Tumours-Melanomas, Sarcoids:</td>
+                        <td><span t-field="doc.melanomas"/></td>
+                    </tr>
+                    <tr>
+                        <td>Dermatitis:</td>
+                        <td><span t-field="doc.Dermatitis"/></td>
+                        <td>Allergy:</td>
+                        <td><span t-field="doc.Allergy"/></td>
+                    </tr>
+                    <tr>
+                        <td>Other:</td>
+                        <td><span t-field="doc.skin_other"/></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Other:</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr>
+                        <td><span t-field="doc.other"/></td>
+                      </tr>
+                </tbody>
+            </table>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Overall Assessment:</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr>
+                        <td><span t-field="doc.overall_assessment"/></td>
+                      </tr>
+                </tbody>
+            </table>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Recommendations:</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr>
+                        <td><span t-field="doc.recommendations"/></td>
+                      </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </t>
+</template>
+
+
+<template id="report_evaluation">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="veterinary.report_evaluation_document"/>
+        </t>
+    </t>
+</template>
+        <report 
+            id="action_report_s"
+            string="Veterinary Evaluation"
+            model="veterinary.evaluation" 
+            report_type="qweb-pdf"
+            file="veterinary.report_evaluation" 
+            name="veterinary.report_evaluation"
+        />
+
+
+    </data>
+</odoo>

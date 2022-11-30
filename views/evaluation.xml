@@ -34,7 +34,7 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="animal"/>
+                                <field name="animal" default="none"/>
                                 <field name="stage_id"/>
                                 <field name="partner_id" domain="[('customer', '=' ,True)]"/>
                             </group>                            

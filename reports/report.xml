@@ -27,21 +27,21 @@
             <strong>Conditions: </strong> 
             <br/>
             <t t-foreach="doc.conditions"   t-as="line">
-                    <span t-esc="line.name"/><br/>                
+                <span t-esc="line.name"/><br/>            
             </t>
             <br/> 
             <br/> 
              <strong>Procedures: </strong> 
             <br/>
             <t t-foreach="doc.procedures"   t-as="line">
-                    <span t-esc="line.name"/><br/>              
+                <span t-esc="line.name"/><br/>              
             </t>
             <br/> 
             <br/> 
              <strong>Prescriptions: </strong> 
             <br/>
             <t t-foreach="doc.prescriptions"   t-as="line">
-                    <span t-esc="line.name"/><br/>                
+                <span t-esc="line.name"/><br/>                
             </t>
             <br/> 
             <!-- <strong>Codes: </strong> <span t-field="doc.codes.name"/> -->
@@ -53,40 +53,65 @@
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr>
-                        <td>Conformation:</td>
-                        <td><span t-field="doc.conformation"/></td>
-                        <td>Feet and Shoeing:</td>
-                        <td><span t-field="doc.feet_shoeing"/></td>
+                            <t t-if="doc.conformation">   
+                            <td>Conformation:</td>
+                            <td><span t-field="doc.conformation"/></td>   
+                            </t>      
+                            <t t-if="doc.feet_shoeing">              
+                            <td>Feet and Shoeing:</td>
+                            <td><span t-field="doc.feet_shoeing"/></td>
+                            </t>
                     </tr>
                     <tr>
+                        <t t-if="doc.le"> 
                         <td>LF:</td>
                         <td><span t-field="doc.le"/></td>
+                        </t>
+                        <t t-if="doc.rf"> 
                         <td>RF:</td>
                         <td><span t-field="doc.rf"/></td>
+                        </t>
                     </tr>
                     <tr>
+                        <t t-if="doc.lh"> 
                         <td>LH:</td>
                         <td><span t-field="doc.lh"/></td>
+                        </t>
+                        <t t-if="doc.rh"> 
                         <td>RH:</td>
                         <td><span t-field="doc.rh"/></td>
+                        </t>
+
                     </tr>
                     <tr>
+                        <t t-if="doc.neck_back_pelvis"> 
                         <td>Neck, Back and Pelvis:</td>
                         <td><span t-field="doc.neck_back_pelvis"/></td>
+                        </t>
+                        <t t-if="doc.flexion_tests"> 
                         <td>Flexion tests:</td>
                         <td><span t-field="doc.flexion_tests"/></td>
+                        </t>
                     </tr>
                     <tr>
+                        <t t-if="doc.ridden"> 
                         <td>Ridden:</td>
                         <td><span t-field="doc.ridden"/></td>
-                        <td>Diagnostic Imaging:</td>
+                        </t>
+                        <t t-if="doc.diagnostic_imaging"> 
+                            <td>Diagnostic Imaging:</td>
                         <td><span t-field="doc.diagnostic_imaging"/></td>
+                        </t>
                     </tr>
                     <tr>
+                        <t t-if="doc.walk"> 
                         <td>Walk:</td>
                         <td><span t-field="doc.walk"/></td>
-                        <td>Trot:</td>
+                        </t>
+                        <t t-if="doc.trot"> 
+                            <td>Trot:</td>
                         <td><span t-field="doc.trot"/></td>
+                        </t>
                     </tr>
 
                 </tbody>
@@ -99,16 +124,22 @@
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr>
+                        <t t-if="doc.res_general"> 
                         <td>General:</td>
                         <td><span t-field="doc.res_general"/></td>
+                        </t>
+                        <t t-if="doc.upper_airway_endoscopy"> 
                         <td>Upper airway endoscopy:</td>
                         <td><span t-field="doc.upper_airway_endoscopy"/></td>
+                        </t>
                     </tr>
                     <tr>
+                        <t t-if="doc.lung_auscultation"> 
                         <td>Lung Auscultation:</td>
                         <td><span t-field="doc.lung_auscultation"/></td>
                         <td></td>
                         <td></td>
+                        </t>
                     </tr>
                 </tbody>
             </table>
@@ -120,16 +151,22 @@
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr>
-                        <td>General:</td>
+                        <t t-if="doc.cardi_general"> 
+                            <td>General:</td>
                         <td><span t-field="doc.cardi_general"/></td>
+                        </t>
+                        <t t-if="doc.auscultation"> 
                         <td>Auscultation:</td>
                         <td><span t-field="doc.auscultation"/></td>
+                        </t>
                     </tr>
                     <tr>
+                        <t t-if="doc.ecg"> 
                         <td>ECG:</td>
                         <td><span t-field="doc.ecg"/></td>
                         <td></td>
                         <td></td>
+                        </t>
                     </tr>
                 </tbody>
             </table>
@@ -141,16 +178,22 @@
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr>
-                        <td>General:</td>
+                        <t t-if="doc.gest_general"> 
+                            <td>General:</td>
                         <td><span t-field="doc.gest_general"/></td>
-                        <td>Worming History:</td>
+                        </t>
+                        <t t-if="doc.worming_history"> 
+                            <td>Worming History:</td>
                         <td><span t-field="doc.worming_history"/></td>
+                        </t>
                     </tr>
                     <tr>
-                        <td>Teeth:</td>
+                        <t t-if="doc.teeth"> 
+                            <td>Teeth:</td>
                         <td><span t-field="doc.teeth"/></td>
                         <td></td>
                         <td></td>
+                        </t>
                     </tr>
                 </tbody>
             </table>
@@ -162,16 +205,24 @@
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr>
+                        <t t-if="doc.nevr_general"> 
                         <td>General:</td>
                         <td><span t-field="doc.nevr_general"/></td>
+                        </t>
+                        <t t-if="doc.mentation"> 
                         <td>Mentation:</td>
                         <td><span t-field="doc.mentation"/></td>
+                        </t>
                     </tr>
                     <tr>
+                        <t t-if="doc.gait"> 
                         <td>Gait:</td>
                         <td><span t-field="doc.gait"/></td>
-                        <td>Eyes:</td>
+                        </t>
+                        <t t-if="doc.eyes"> 
+                            <td>Eyes:</td>
                         <td><span t-field="doc.eyes"/></td>
+                        </t>
                     </tr>
                 </tbody>
             </table>
@@ -183,16 +234,22 @@
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr>
+                        <t t-if="doc.fig"> 
                         <td>Female / Intact Male / Gelding:</td>
                         <td><span t-field="doc.fig"/></td>
+                        </t>
+                        <t t-if="doc.testicles"> 
                         <td>Testicles:</td>
                         <td><span t-field="doc.testicles"/></td>
+                        </t>
                     </tr>
                     <tr>
+                        <t t-if="doc.vulva"> 
                         <td>Vulva:</td>
                         <td><span t-field="doc.vulva"/></td>
                         <td></td>
                         <td></td>
+                        </t>
                     </tr>
                 </tbody>
             </table>
@@ -204,22 +261,34 @@
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr>
+                        <t t-if="doc.scars"> 
                         <td>Scars – Traumatic / Surgical:</td>
                         <td><span t-field="doc.scars"/></td>
-                        <td>Tumours-Melanomas, Sarcoids:</td>
+                        </t>
+                        <t t-if="doc.melanomas"> 
+                            <td>Tumours-Melanomas, Sarcoids:</td>
                         <td><span t-field="doc.melanomas"/></td>
+                        </t>
                     </tr>
                     <tr>
-                        <td>Dermatitis:</td>
+                        <t t-if="doc.Dermatitis"> 
+                            <td>Dermatitis:</td>
                         <td><span t-field="doc.Dermatitis"/></td>
-                        <td>Allergy:</td>
+                        </t>
+                        <t t-if="doc.Allergy"> 
+                            <td>Allergy:</td>
                         <td><span t-field="doc.Allergy"/></td>
+                        </t>
                     </tr>
                     <tr>
-                        <td>Other:</td>
+                        <t t-if="doc.skin_other"> 
+                            <td>Other:</td>
                         <td><span t-field="doc.skin_other"/></td>
+
                         <td></td>
                         <td></td>
+                        </t>
+                        
                     </tr>
                 </tbody>
             </table>
@@ -231,7 +300,9 @@
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr>
+                        <t t-if="doc.other"> 
                         <td><span t-field="doc.other"/></td>
+                        </t>
                       </tr>
                 </tbody>
             </table>
